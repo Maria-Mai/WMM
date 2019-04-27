@@ -31,7 +31,7 @@ phase_sin <- function(x){
   }
   z
 }
-curve(phase_sin(x), rom=0, to=1, col="blue", main="d) Phasen")
+curve(phase_sin(x), from=0, to=1, col="blue", main="d) Phasen")
 
 #e)
 odd_sin <- function(x){
