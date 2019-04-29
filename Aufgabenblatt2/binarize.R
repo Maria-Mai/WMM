@@ -43,21 +43,15 @@
   layout(1)
   
   #e)
-  
-  pictures <- list(algae, tonga, alga)
+  graphic_fields <- list(algae, tonga, alga)
   methods <- c("fixed", "mean", "median", "kmeans")
   
   layout(matrix(1:4, 2, 2))
   
-  for (p in pictures)
-  {
-    for (m in methods)
-    {
-      binarize(x=p, method=m, plot=TRUE)
+  for(g in graphic_fields){
+    for(m in methods){
+      binarize(g, m, plot=TRUE)
     }
   }
   layout(1)
-  
   dev.off()
-  
-  
