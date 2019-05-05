@@ -1,0 +1,9 @@
+a) Inwiefern realisiert die Funktion die Shannonformel und wo sind Unterschiede zu vermerken?
+Durch den Outer-Befehl wird eine Matrix erzeugt, wobei jede Zeile i Beiträge zu der Funktionsauswertung des i-ten x enthält und jede Spalte j Einträge mit dem j-ten Wert des times-Vektors.
+Die implementierte Funktionsvorschrift der einzelnen Summanden entspricht der Shannonformel. Die Shannonformel ist jedoch eine unendliche Summe über alle ganzen Zahlen j. Da diese Bedingung nicht realisiert werden kann, wird in der implementierten Funktion alternativ die Summe über alle Abtastwerte, welche im Vektor times gespeichert sind, gebildet. 
+
+e) Woher resultieren die kleinen Unterschiede im Randbereich?
+Mit der Abtastfrequenz von 50 Hz können nach dem Shannon-Abtasttheorem nur Funktion der Frequenz < 25 Hz detektiert werden. Da in dem betreffenden Randbereich schnelle Änderungen der Amplituden vorhanden sind, lässt sich vermuten, dass diese auf eine höherfrequenzierte Sinus-Welle zurück gehen,welche außerhalb des eindeutig reproduzierbaren Frequenzbereichs liegt. Um den Bereich besser zu rekonstruieren wird eine höhere Abtastfrequenz benötigt.
+
+g) Deuten Sie den beobachteten Effekt
+Die Shannonformel enthält einen sinc-Term, der als sin(r)/r definiert ist und mit zunehmenden r-Werten gegen den Funktionswert 0 geht. Bei x-Werten außerhalb des Intervalls aus dem die Abtastwerte kommen, ist die Differenz größer, womit die Gewichtung bzw. der Beitrag des Funktionswertes fj zur Gesamtsumme verschwindend gering wird.
