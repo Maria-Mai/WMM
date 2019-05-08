@@ -1,0 +1,6 @@
+i)
+Bis ca. C=4 verbessert sich das SNR. Bei dem genannten Wert passt die Stufenform der 
+Quantisierung am besten zu der Kurvenform der Normalveteilung. Bei kleineren Werten 
+für C, steigt die Kurve zu flach und bei größeren Werten zu steil an. Allerdings
+scheint es wesentlich weniger schlimm zu sein, dass es zu stark steigt, 
+da die Kurve bei größeren Werten weniger steil fällt, als sie davor angestiegen ist.
