@@ -14,7 +14,7 @@ quantize <- function(x,bits=8){
 
 #b
 #auskommentierte Objekte befinden sich schon in der rda-Datei
-test_seq = seq(0,1,length=5000)**3
+#test_seq = seq(0,1,length=5000)**3
 plot(quantize(test_seq))
 
 #c 
@@ -70,6 +70,6 @@ for(i in C){
   i_test_seq = rnorm(5000,1/2,1/(2*i))
   SNR_results <- c(SNR_results, SNR(i_test_seq, quantize(i_test_seq)))
 }
-#SNR_results
+
 plot(C, SNR_results)
 dev.off()
