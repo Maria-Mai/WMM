@@ -1,5 +1,5 @@
 ## Einlesen der Daten
-funktionen = load(file = "Aufgaben/Aufgabenblatt2/claude.rda")
+funktionen = load(file = "Aufgabenblatt2/claude.rda")
 wave = get(funktionen[1])
 shannon = get(funktionen[2])
 
