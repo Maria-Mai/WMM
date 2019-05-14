@@ -13,9 +13,8 @@ quantize <- function(x,bits=8){
 }
 
 #b
-#auskommentierte Objekte befinden sich schon in der rda-Datei
-#test_seq = seq(0,1,length=5000)**3
-plot(quantize(test_seq))
+test_seq = seq(0,1,length=5000)**3
+#plot(quantize(test_seq))
 
 #c 
 decibel <- function(x){
@@ -36,25 +35,25 @@ snr_data[2,"d"] <- SNR(test_seq, quantize(test_seq, 12))
 snr_data[3,"d"] <- SNR(test_seq, quantize(test_seq, 16))
 
 #e
-#norm_test_seq = runif(5000, 0, 1)
+norm_test_seq = runif(5000, 0, 1)
 snr_data[1,"e"] <- SNR(norm_test_seq, quantize(norm_test_seq, 8))
 snr_data[2,"e"] <- SNR(norm_test_seq, quantize(norm_test_seq, 12))
 snr_data[3,"e"] <- SNR(norm_test_seq, quantize(norm_test_seq, 16))
 
 #f
-#rnorm_test_seq = rnorm(5000, 1/2, 1/8)
+rnorm_test_seq = rnorm(5000, 1/2, 1/8)
 snr_data[1,"f"] <- SNR(rnorm_test_seq, quantize(rnorm_test_seq, 8))
 snr_data[2,"f"] <- SNR(rnorm_test_seq, quantize(rnorm_test_seq, 12))
 snr_data[3,"f"] <- SNR(rnorm_test_seq, quantize(rnorm_test_seq, 16))
 
 #g
-#aequi_test_seq <- seq(from=0, to=1, length=5000)
+aequi_test_seq <- seq(from=0, to=1, length=5000)
 snr_data[1,"g"] <- SNR(aequi_test_seq, quantize(aequi_test_seq, 8))
 snr_data[2,"g"] <- SNR(aequi_test_seq, quantize(aequi_test_seq, 12))
 snr_data[3,"g"] <- SNR(aequi_test_seq, quantize(aequi_test_seq, 16))
 
 #h
-#h_test_seq = runif(5000,-1/10,1)
+h_test_seq = runif(5000,-1/10,1)
 snr_data[1,"h"] <- SNR(h_test_seq, quantize(h_test_seq, 8))
 snr_data[2,"h"] <- SNR(h_test_seq, quantize(h_test_seq, 12))
 snr_data[3,"h"] <- SNR(h_test_seq, quantize(h_test_seq, 16))
