@@ -1,0 +1,4 @@
+e)
+1. Am besten ist die Binärversion vom Negativ (binarise(1-x)), gefolgt von dem einfachen Negativ.  
+2. Dass der Hintergrund sich in 2 unterschiedliche Bereiche teilt.
+3. Die Entfernung des Hintergrundes durch die Hervorhebung der (äußeren) Kanten durch einen Hochpassfilter kann helfen.
