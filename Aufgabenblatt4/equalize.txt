@@ -1,0 +1,8 @@
+d)
+Bild "algae": Misserfolg. Abbildung war vorher für Erkennung der drei Objekte besser.
+Bild "couple": Erfolg. Bild ist kontrastreicher.
+Bild "GUESS": Erfolg. Informationen des Bildes sind ersichtlich.
+Bild "JFKennedy": Misserfolg. Schrift war vorher deutlicher zu erkennen.
+Bild "mri1": Misserfolg. Bild war vorher deutlicher.
+
+e) "Zu Asche, zu Staub" gesungen von Severija Janusauskaite (alias Swetlana Sorokina) im Tanzpalast Moka Efti Berlin im Jahr 1929. 

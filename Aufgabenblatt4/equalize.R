@@ -1,35 +1,65 @@
-#Loading data
-pics = load("Aufgabenblatt4/equalize.rda", verbose = T)
-
-#Function to equalize picture matrices
-equalize <- function(x) {
-  #TODO calculate relative grey value [q(l)] hist for [fnm]
-  # -> number of grexvlues divided by the total muber of picture points
-  #compute cumulative grey value hist qsum(gamma) = sum_l=0_gamma(q(gamma))
-  #transform all picture points to floor((L-1) * qsum(fnm)) with [0, L-1] and L= 2^b the quantisierungsbedingte Grauindexbereich 
-  # B = 8 -> 2^b -> 256 -> grey values from 0 to 255
+# a) Function to equalize picture matrices
+equalize <- function(x, RGB) {
+  if(missing(RGB)) {
+    RGB = FALSE
+  }
+  if (length(dim(x)) == 3 && RGB == TRUE) {
+    for (i in 1:3) {
+      x[,,i] = equalize(x[,,i])
+    }
+    return(x)
+  } else if (length(dim(x)) == 3 && RGB == FALSE) {
+    g <- array(0, dim = c(dim(x)[1:2]))
+    for (i in 1:dim(x)[1]) {
+      for (j in 1:dim(x)[2]) {
+        g[i,j] <- mean(x[i,j,])
+      }
+    }
+    return(equalize(g))
+  }
   
-  b = 8
-  L= 2^b
-  
-  greyValues = hist(x, breaks = seq(0,1, l = L), plot=FALSE)[[2]]
-  relGreyValues = greyValues/length(x)
-  
-  qsum = cumsum(relGreyValues)
-  
-  
+  if(length(dim(x)) == 2 ) {
+    x[] <- rank(x)/length(x) 
+    x <- (x - min(x)) / (max(x) - min(x))
+    return (x) 
+  }
 
 }
 
-x <- get(pics[1])
-max(greyValues)
-max(relGreyValues)
-length(x)
-hist(x, breaks = seq(0,1, l = L))
-sum(relGreyValues)
+# b) Loading data
+pics = load("Aufgabenblatt4/equalize.rda")
 
-y = 2:5
-for (i in y) {
-  print(i)
+# c) Function to plot histograms
+plot.equalize <- function(x, main = "", K = 64) {
+  xEqu <- equalize(x)
   
+  layout(matrix(c(1:6), ncol = 2, byrow = T))
+  plot.array(x,"Original Picture")
+  plot.array(xEqu,"Equalized Picture")
+  
+  xHist <- hist(x, breaks = seq(0,1,l= K+1),main = "absolute Histogram  of Original Picture")
+  xEquHist <- hist(xEqu, breaks = seq(0,1,l= K+1), main = "absolute Histogram of Equalized Picture")
+  
+  plot.ecdf(x, xlab = "Greyvalue", ylab= "Propability", main = "Cumulative Distribution of Original Picture")
+  plot.ecdf(xEqu, xlab = "Greyvalue", ylab= "Propability", main = "Cumulative Distribution of Original Picture")
+  
+  layout(1)
 }
+
+
+#d) Testing all pictures
+for ( i in 1:length(pics)) {
+  x <- get(pics[i])
+  if (is.array(x)) plot.equalize(x)
+}
+
+# e) GUESS
+# f) RGB == True
+# g) RGB == False
+# h) Plot Potus
+p <- get("potus")
+layout(matrix(c(1:4),2))
+plot.array(p, main = "Original Potus")
+plot.array(equalize(p), main = "Equalized Potus")
+plot.array(equalize(p, RGB = T), main = "Equalized Color Potus")
+plot.array(equalize(p, RGB = F), main = "Equalized Grey Potus")
