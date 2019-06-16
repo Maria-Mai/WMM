@@ -1,4 +1,3 @@
-
 # a)
 data(iris)
 load("Aufgabenblatt6/pca.rda")
@@ -9,7 +8,7 @@ plot.ldf <- function(x,...) {
   stopifnot(is.factor(x[[ncol(x)]]))
   plot(x[,-ncol(x)],col = x[[ncol(x)]],...)
   #legend("bottom",unique(x[[ncol(x)]]),col=1:length(x[[ncol(x)]]),...)
-  }
+}
 
 #c)
 
@@ -32,8 +31,8 @@ PCA <- function(x, n) {
   eigenvec <- covx.eig$vectors[,1:n]
   
   structure (.Data = list(mu = mu,
-                           eigenval = eigenval, 
-                           eigenvec = eigenvec), class = 'PCA')
+                          eigenval = eigenval, 
+                          eigenvec = eigenvec), class = 'PCA')
 }
 
 #e)
@@ -42,7 +41,7 @@ predict.PCA <- function(o, newdata) {
     fac <- newdata[,ncol(newdata)]
     x <- as.matrix(newdata[,-ncol(newdata)])
   }
-
+  
   d <- diag(o$eigenval^(-1/2), length(o$eigenval))
   
   proj <- t((d %*% t(o$eigenvec)) %*% t(sweep(x,2,o$mu)))
@@ -74,8 +73,11 @@ for (data in list(ADIDAS,diabetes,dna,FIAT,heart,iris, vehicle, watermark)) {
   plot.ldf(predict.PCA(PCA(data,2),data))
   #plot.ldf(predict.PCA(PCA(data,),data))
 }
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> d929d62e48bb4050e2f30d029f05d4943aace0cb
