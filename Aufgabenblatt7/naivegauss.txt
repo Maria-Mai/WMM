@@ -1,0 +1,12 @@
+#e)
+F(Test + Lern) = 0.29
+F(Lern + Test) = 0.26
+F(Lern + Lern) = 0.227 
+F(Test + Test) = 0.17
+F(Test + Lern) > F(Lern + Test) > F(Lern + Lern) > F(Test + Test) 
+Wenn die Lernstichprobe gleich der Teststichprobe ist, ist der Fehler die Reklassifikationsfehlerrate und unterschätzt den Fehler bei Anwendung der Entscheidungsregel auf neue Muster. Dementsprechend sind die Fehlerraten geringer als die anderen beiden. Besonders stark ist der Effekt, wenn die Teststichprobe einen geringen Umfang besitzt, was bei dem Datensatz diabetes.test der Fall ist. 
+Sind Lernstichprobe und Teststichprobe unterschiedliche Datensätze, so ist der Fehler die Neuklassifikationsfehlerrate. Der Trend zur pessimistischen Bewertung tritt bei geringen Lernstichproben auf, was bei dem Datensatz diabetes.test als Lernstichprobe der Fall ist.
+
+#f)
+F(Iris) = 0.0001333333
+F(Diabetes) = 0.0003068712

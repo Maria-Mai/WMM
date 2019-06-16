@@ -4,22 +4,15 @@ naivegauss <- function(x) {
   
   xk <- split(x[-ncol(x)], x[, ncol(x)])
   fac <- x[[ncol(x)]]
-  c <- names(x[ncol(x)])
   
   p <- t(as.matrix(table(fac) / length(fac)))
-  #p <- as.vector(sapply (xk, nrow) / nrow(x))
-  
-  #mu <- by(x[,-ncol(x)],fac,FUN=colMeans)
   mu <- sapply (xk, colMeans)
-  
-  #s <- by(x[,-ncol(x)],fac,FUN=cov)
   s <- sapply(xk, cov)
   
   structure (.Data = list(
     p = p,
     mu = mu,
     s = s,
-    c = c,
     class = 'naivegauss'
   ))
 }
@@ -37,16 +30,55 @@ predict.naivegauss <- function(o, newdata) {
   }
   
   f <- factor(apply(u, 1, which.max),levels = c(1:length(o$p)), labels = colnames(o$p))
-
-  pred <- data.frame(newdata,f )
-  colnames(pred)[ncol(pred)] <- o$c
-  return(pred)
+  return(f)
 }
+
+
 
 # c)
 heldout <- function(x, newdata = x,  method, ...) {
-  method(...)
-  return(numeric[1])
+  testfac <- newdata[[ncol(newdata)]]
+  if(is.factor(newdata[[ncol(newdata)]])) {
+    newdata <- newdata[-ncol(newdata)]
+  }
+  pred <- predict.naivegauss(method(x, ...), newdata)
+  
+  falserate <- mean(testfac!= pred) 
+
+  classtest <- split(cbind(testfac, pred), f = testfac)
+  falseratematrix <- table(testfac,pred)
+  
+  structure (.Data = list(
+    falserate = as.numeric(falserate)),
+    confused = falseratematrix
+  )
 }
 
+
 # d)
+heldout(iris,iris,naivegauss)
+
+# e)
+load("Aufgabenblatt7/diabetes.rda")
+
+heldout(diabetes.lern, diabetes.lern, naivegauss)
+heldout(diabetes.lern, diabetes.test, naivegauss)
+heldout(diabetes.test, diabetes.lern, naivegauss)
+heldout(diabetes.test, diabetes.test, naivegauss)
+
+# f)
+leave1out <- function(x, method, ...) {
+  #falserates <- apply(data <- expand.grid(x,x), 1, function (d) heldout(get(d[1]),get(d[2]),naivegauss))
+  n = nrow(x)
+  falserate = 0
+  for (i in 1: length(n)) {
+    testdata <- x[-i,]
+    traindata <- x[i,]
+    falserate = falserate + heldout(x,x,method,...)$falserate
+  }
+  falserate = falserate / n
+  return(falserate)
+}
+leave1out(iris,naivegauss)
+leave1out(rbind(diabetes.test,diabetes.lern), naivegauss)
+
