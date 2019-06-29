@@ -1,5 +1,5 @@
 #a
-data <- get(load("unipoly.rda"))
+mydata <- get(load("unipoly.rda"))
 
 #b
 polyfun <- function(x,a){
@@ -17,25 +17,45 @@ polyfit <- function(xy,n){
 
 #d
 polyfits <- function(xy, deg, plot=FALSE){
-  lm.list <- sapply(deg, polyfit, xy=xy, simplify = FLASE)
+  lm.list <- sapply(deg, polyfit, xy=xy, simplify = FALSE)
   if(plot==TRUE){
-    aci.list <- sapply(lm_list, AIC)
-    bci.list <-sapply(lm_list, BIC)
-    plot()
+    aic <- sapply(lm.list, AIC)
+    bic <-sapply(lm.list, BIC)
+    col <- c("blue", "red")
+    plot(rep(deg, 2), c(aic, bic), pch=16, col=col[c(rep(1, length(aic)), rep(2,length(bic)))],
+          main=paste(names(xy),collapse=" ~ "), xlab="degree", ylab="goodness of fit" )
   }
   lm.list
 }
 
-
 #e
 polyplot <- function(o, xy){
-
-  
+  a.vec <- o$coefficients
+  plot(xy, main=mtext(paste("BIC:" , round(BIC(o), 2), "PolyGrad:" ,length(o$coefficients)-1)))
+  curve(polyfun(x, a.vec), col=2, add=TRUE)
+  out <- paste(round(o$coeff), collapse=', ')
+  mtext(out,side=4, cex=0.6)
 }
-
-#polyfit(data, 6)
 
 #f
 polyplots <- function(xy, deg=0:11){
-  
+  poly.list <- polyfits(xy, deg,TRUE)
+  layout(matrix(c(1,2,3,4),2,2,byrow=TRUE))
+  sapply(poly.list, polyplot, xy=xy)
+  layout(1)
 }
+
+#g
+pdf("unipoly.pdf")
+polyplots(mydata)
+data("cars")
+polyplots(cars)
+
+polyplots(data.frame(LifeCycleSavings$pop15, LifeCycleSavings$pop75))
+polyplots(data.frame(LifeCycleSavings$pop15, LifeCycleSavings$dpi))
+polyplots(data.frame(LifeCycleSavings$pop75, LifeCycleSavings$pop15))
+polyplots(data.frame(LifeCycleSavings$pop75, LifeCycleSavings$dpi))
+polyplots(data.frame(LifeCycleSavings$dpi, LifeCycleSavings$pop15))
+polyplots(data.frame(LifeCycleSavings$dpi, LifeCycleSavings$pop75))
+
+dev.off()
