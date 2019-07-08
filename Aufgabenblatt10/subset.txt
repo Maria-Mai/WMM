@@ -1,0 +1,11 @@
+Zuerst haben wir uns die Daten angeguckt und doppeltes Vorkommen
+und die Antźahl der nicht vorhandenen Werte überprüft.
+Dann haben wir einmal mit dem Caret Paket mit 2 Methoden 
+(Learning Vector Quantization , recursive feature elimination) 
+und einmal mit dem random forest Paket die besten Merkmale extrahiert. 
+Danach haben wir evaluiert welcher Merkmalsvektor die besten Ergebnisse
+erzielt. Wobei Random Forest gewonnen hat. 
+Dazu haben wir mit den Daten der ausgewählten Merkmale gelernt.
+Man hätte auch ein Train und Testdatensatz machen können, aber 
+da sie geschrieben haben, dass sie die Testdaten haben, 
+haben wir den Datensatz nicht aufgesplittet.
