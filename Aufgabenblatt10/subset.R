@@ -98,4 +98,4 @@ v1 <- extractedFeaturesLVQ[-length(extractedFeaturesLVQ)]
 v2 <- extractedFeaturesRF[-length(extractedFeaturesRF)]
 v3 <- extractedFeaturesRFE[-length(extractedFeaturesRFE)]
 
-save(v1, v2, v3, file="subset.rda")
+save(v1, v2, v3, file="subset.rda", version = 3)
